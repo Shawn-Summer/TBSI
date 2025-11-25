@@ -80,7 +80,8 @@ class BaseBackbone(nn.Module):
         template_patch_pos_embed = nn.functional.interpolate(patch_pos_embed, size=(new_P_H, new_P_W), mode='bicubic',
                                                              align_corners=False)
         template_patch_pos_embed = template_patch_pos_embed.flatten(2).transpose(1, 2)
-
+        
+        # NOTE: pos_embed_z 是在 pos_embed 做插值 改变形状得到的 同理 pos_embed_x
         self.pos_embed_z = nn.Parameter(template_patch_pos_embed)
         self.pos_embed_x = nn.Parameter(search_patch_pos_embed)
 

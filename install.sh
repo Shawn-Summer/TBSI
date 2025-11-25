@@ -1,5 +1,5 @@
 echo "****************** Installing pytorch ******************"
-conda install pytorch==1.9.0 torchvision==0.10.0 torchaudio==0.9.0 cudatoolkit=10.2 -c pytorch
+conda install pytorch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 pytorch-cuda=11.8 -c pytorch -c nvidia
 
 echo ""
 echo ""
@@ -54,7 +54,7 @@ pip install tikzplotlib
 echo ""
 echo ""
 echo "****************** Installing thop tool for FLOPs and Params computing ******************"
-pip install thop-0.0.31.post2005241907
+pip install thop==0.0.31
 
 echo ""
 echo ""

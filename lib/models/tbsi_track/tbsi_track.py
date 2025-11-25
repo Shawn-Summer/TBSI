@@ -67,14 +67,13 @@ class TBSITrack(nn.Module):
         num_template_token = 64
         num_search_token = 256
         # encoder outputs for the visible and infrared search regions, both are (B, HW, C)
-        enc_opt1 = cat_feature[:, num_template_token:num_template_token + num_search_token, :]
-        enc_opt2 = cat_feature[:, -num_search_token:, :]
-        enc_opt = torch.cat([enc_opt1, enc_opt2], dim=2)
-        opt = (enc_opt.unsqueeze(-1)).permute((0, 3, 2, 1)).contiguous()
+        enc_opt1 = cat_feature[:, num_template_token:num_template_token + num_search_token, :] # NOTE: RGB的 search region
+        enc_opt2 = cat_feature[:, -num_search_token:, :] # NOTE: TIR的 search region
+        enc_opt = torch.cat([enc_opt1, enc_opt2], dim=2) # NOTE: [B,L_x,2c]
+        opt = (enc_opt.unsqueeze(-1)).permute((0, 3, 2, 1)).contiguous() # NOTE: [B,1,2c,L_x]
         bs, Nq, C, HW = opt.size()
-        HW = int(HW/2)
-        opt_feat = opt.view(-1, C, self.feat_sz_s, self.feat_sz_s)
-        opt_feat = self.tbsi_fuse_search(opt_feat)
+        opt_feat = opt.view(-1, C, self.feat_sz_s, self.feat_sz_s) # NOTE: [B,2c,H,W]
+        opt_feat = self.tbsi_fuse_search(opt_feat) # NOTE: [B,c,H,W] 实际上是个 卷积层 将 channel 从2c 变为 c 且 H 和 W 不变
 
         if self.head_type == "CORNER":
             # run the corner head

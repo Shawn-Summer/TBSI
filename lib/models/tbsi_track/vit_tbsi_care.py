@@ -144,7 +144,7 @@ class VisionTransformerTBSI(BaseBackbone):
         self.pos_drop = nn.Dropout(p=drop_rate)
 
         dpr = [x.item() for x in torch.linspace(0, drop_path_rate, depth)]  # stochastic depth decay rule
-        self.blocks = nn.Sequential(*[
+        self.blocks = nn.Sequential(*[ # NOTE: 这里直接使用基本的 transformer block 而不是 OSTrack 的 CEBlock 
             Block(
                 dim=embed_dim, num_heads=num_heads, mlp_ratio=mlp_ratio, qkv_bias=qkv_bias, drop=drop_rate,
                 attn_drop=attn_drop_rate, drop_path=dpr[i], norm_layer=norm_layer, act_layer=act_layer)
@@ -163,8 +163,10 @@ class VisionTransformerTBSI(BaseBackbone):
         self.init_weights(weight_init)
 
     def forward_features(self, z, x):
+        # NOTE: z 和 x [2,B,C,H,W]
         B, H, W = x[0].shape[0], x[0].shape[2], x[0].shape[3]
-
+        
+        # NOTE: search region 和 template 的补丁会被映射到 同一个特征空间，此时的向量距离或相似度才能真实反映原始补丁的视觉相似性
         x_v = self.patch_embed(x[0])
         z_v = self.patch_embed(z[0])
         x_i = self.patch_embed(x[1])
@@ -196,9 +198,9 @@ class VisionTransformerTBSI(BaseBackbone):
         lens_x = self.pos_embed_x.shape[1]
         
         tbsi_index = 0
-        for i, blk in enumerate(self.blocks):
+        for i, blk in enumerate(self.blocks): # NOTE: 这里是先进入 transformer blocks 然后 进入tbsi_layers 进行融合
             x_v = blk(x_v)
-            x_i = blk(x_i)
+            x_i = blk(x_i) # NOTE: 这里不同模态还是享用同一参数
             if self.tbsi_loc is not None and i in self.tbsi_loc:
                 x_v, x_i = self.tbsi_layers[tbsi_index](x_v, x_i, lens_z)
                 tbsi_index += 1
@@ -206,6 +208,9 @@ class VisionTransformerTBSI(BaseBackbone):
         x_v = recover_tokens(x_v, lens_z, lens_x, mode=self.cat_mode)
         x_i = recover_tokens(x_i, lens_z, lens_x, mode=self.cat_mode)
         x = torch.cat([x_v, x_i], dim=1)
+        # NOTE: x_v 是[B,L_vz+L_vx,C']
+        # NOTE: x_i 是[B,L_iz+L_ix,C']
+        # NOTE: x 是 x_v 和 x_i 在 dim=1 concat 所以shape是 [B,L_vz+L_vx+L_iz+L_ix,C']
         
         aux_dict = {"attn": None}
         return self.norm(x), aux_dict
