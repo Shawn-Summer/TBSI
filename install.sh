@@ -1,5 +1,6 @@
 echo "****************** Installing pytorch ******************"
-conda install pytorch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 pytorch-cuda=11.8 -c pytorch -c nvidia
+# 使用 conda 升级
+conda install pytorch=2.3.0 torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
 
 echo ""
 echo ""
@@ -44,7 +45,7 @@ pip install jpeg4py
 echo ""
 echo ""
 echo "****************** Installing tensorboard ******************"
-pip install tb-nightly
+pip install tensorboard
 
 echo ""
 echo ""
@@ -54,7 +55,7 @@ pip install tikzplotlib
 echo ""
 echo ""
 echo "****************** Installing thop tool for FLOPs and Params computing ******************"
-pip install thop==0.0.31
+pip install thop==0.0.31.post2005241907
 
 echo ""
 echo ""
