@@ -369,7 +369,27 @@ python tracking/test.py tbsi_track vitb_256_tbsi_32x4_4e4_lasher_15ep_in1k --dat
 python tracking/analysis_results.py --tracker_name tbsi_track --tracker_param vitb_256_tbsi_32x4_4e4_lasher_15ep_in1k --dataset_name rgbt210
 ```
 
-可以得到所需要的metric：
 
-Precision NormPrec Success
+```bash
+(tbsi) ➜  TBSI git:(main) ✗ python tracking/analysis_results.py --tracker_name tbsi_track --tracker_param vitb_256_tbsi_32x4_4e4_lasher_15ep_in1k --dataset_name rgbt210
+/data1/zhh/anaconda3/envs/tbsi/lib/python3.9/site-packages/timm/models/helpers.py:7: FutureWarning: Importing from timm.models.helpers is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+/data1/zhh/anaconda3/envs/tbsi/lib/python3.9/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/data1/zhh/anaconda3/envs/tbsi/lib/python3.9/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+Loading seq list from /data1/zhh/xiaxulong/TBSI/data/RGB_T210List.txt
+/data1/zhh/xiaxulong/TBSI/data/RGB_T210List.txt doesn't exist. Loading seq list from os.listdir
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 210/210 [00:00<00:00, 762.13it/s]
+
+
+Computed results over 210 / 210 sequences
+
+Reporting results over 210 / 210 sequences
+
+rgbt210                                      | AUC        | OP50       | OP75       | Precision    | Norm Precision    |
+vitb_256_tbsi_32x4_4e4_lasher_15ep_in1k      | 54.28      | 67.95      | 33.20      | 77.37        | 64.18             |
+
+```
+
 
