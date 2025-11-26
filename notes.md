@@ -366,6 +366,10 @@ python tracking/test.py tbsi_track vitb_256_tbsi_32x4_4e4_lasher_15ep_in1k --dat
 ### 绘制结果
 
 ```python
-python tracking/analysis_results.py --tracker_name tbsi_track --tracker_param vitb_256_tbsi_32
+python tracking/analysis_results.py --tracker_name tbsi_track --tracker_param vitb_256_tbsi_32x4_4e4_lasher_15ep_in1k --dataset_name rgbt210
 ```
+
+可以得到所需要的metric：
+
+Precision NormPrec Success
 

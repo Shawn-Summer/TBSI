@@ -49,7 +49,7 @@ pip install tensorboard
 echo ""
 echo ""
 echo "****************** Installing tikzplotlib ******************"
-pip install tikzplotlib
+pip install matplot2tikz
 
 echo ""
 echo ""
