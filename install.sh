@@ -1,6 +1,5 @@
 echo "****************** Installing pytorch ******************"
-# 使用 conda 升级
-conda install pytorch=2.3.0 torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+pip install torch==2.3.0 torchvision==0.18.0 torchaudio==2.3.0 --index-url https://download.pytorch.org/whl/cu118
 
 echo ""
 echo ""

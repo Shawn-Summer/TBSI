@@ -310,7 +310,11 @@ python tracking/train.py --script tbsi_track --config vitb_256_tbsi_32x4_4e4_las
 
 ## 评估
 
-首先在`lacal.py`中添加评估数据集的路径，例如使用lasher数据集
+### 生成测试结果
+
+#### lasher 数据集的结果输出
+
+首先在`local.py`中添加评估数据集的路径，例如使用lasher数据集
 
 ```python
     settings.lasher_path = '/data1/zhh/xiaxulong/TBSI/data/lasher'
@@ -322,5 +326,46 @@ python tracking/train.py --script tbsi_track --config vitb_256_tbsi_32x4_4e4_las
 python tracking/test.py tbsi_track vitb_256_tbsi_4x4_4e4_lasher_15ep_in1k --dataset_name lasher_test --threads 6 --num_gpus 1
 ```
 
+然后就会在`output/test`中生成一些测试集的结果:
 
+```python
+(tbsi) ➜  test git:(main) ✗ tree
+.
+└── tracking_results
+    └── tbsi_track
+        └── vitb_256_tbsi_4x4_4e4_lasher_15ep_in1k
+            ├── 10runone.txt
+            ├── 10runone_time.txt
+            ├── 11leftboy.txt
+            ├── 11leftboy_time.txt
+            ├── 11runtwo.txt
+            ├── 11runtwo_time.txt
+            ├── 2runseven.txt
+            ├── 2runseven_time.txt
+            ├── 3bike1.txt
+            ├── 3bike1_time.txt
+            ├── 3men.txt
+            ├── 3men_time.txt
+            ├── 3pinkleft.txt
+            ├── 3pinkleft_time.txt
+            ├── AQtruck2north.txt
+```
+
+#### rgbt210 数据集的结果输出
+
+```bash
+python tracking/test.py tbsi_track vitb_256_tbsi_32x4_4e4_lasher_15ep_in1k --dataset_name rgbt210 --threads 6 --num_gpus 1
+```
+
+#### rgbt234 数据集的结果输出
+
+```bash
+python tracking/test.py tbsi_track vitb_256_tbsi_32x4_4e4_lasher_15ep_in1k --dataset_name rgbt234 --threads 6 --num_gpus 1
+```
+
+### 绘制结果
+
+```python
+python tracking/analysis_results.py --tracker_name tbsi_track --tracker_param vitb_256_tbsi_32
+```
 

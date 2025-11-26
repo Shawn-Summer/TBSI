@@ -34,6 +34,6 @@ def local_env_settings():
     settings.vot_path = '/data1/zhh/xiaxulong/TBSI/data/VOT2019'
     settings.youtubevos_dir = ''
     settings.lasher_path = '/data1/zhh/xiaxulong/TBSI/data/lasher'
-
+    settings.rgbt210_path = '/data1/zhh/xiaxulong/TBSI/data/RGB_T210'
     return settings
 
