@@ -28,8 +28,10 @@ def run_tracker(tracker_name, tracker_param, run_id=None, dataset_name='otb', se
 
     if sequence is not None:
         dataset = [dataset[sequence]]
-
+    
+    # NOTE: 实例化 Tracker 类
     trackers = [Tracker(tracker_name, tracker_param, dataset_name, run_id)]
+
     run_dataset(dataset, trackers, debug, threads, num_gpus=num_gpus
     )
 

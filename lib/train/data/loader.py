@@ -73,18 +73,19 @@ def ltr_collate(batch):
 
 def ltr_collate_stack1(batch):
     """Puts each data field into a tensor. The tensors are stacked at dim=1 to form the batch"""
-
+    # NOTE: 将一个批次（batch）的样本数据，从 Python 列表的形式，转换成一个统一的 PyTorch 张量（Tensor）或一个包含张量的字典 / 列表
+    # NOTE: batch 是个列表，每个 element 是 [1,256,256] 的图片 我们希望他变为 [1,batch_size,256,256] search region 
     error_msg = "batch must contain tensors, numbers, dicts or lists; found {}"
     elem_type = type(batch[0])
     if isinstance(batch[0], torch.Tensor):
         out = None
-        if _check_use_shared_memory():
-            # If we're in a background process, concatenate directly into a
-            # shared memory tensor to avoid an extra copy
-            numel = sum([x.numel() for x in batch])
-            storage = batch[0].storage()._new_shared(numel)
-            out = batch[0].new(storage)
-        return torch.stack(batch, 1, out=out)
+        # if _check_use_shared_memory():
+        #     # If we're in a background process, concatenate directly into a
+        #     # shared memory tensor to avoid an extra copy
+        #     numel = sum([x.numel() for x in batch])
+        #     storage = batch[0].storage()._new_shared(numel)
+        #     out = batch[0].new(storage)
+        return torch.stack(batch, 1)
         # if batch[0].dim() < 4:
         #     return torch.stack(batch, 0, out=out)
         # return torch.cat(batch, 0, out=out)

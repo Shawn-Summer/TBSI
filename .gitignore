@@ -159,8 +159,6 @@ cython_debug/
 .idea/
 
 # Tracking
-lib/train/admin/local.py
-lib/test/evaluation/local.py
 ltr/run_ltr_local.py
 ltr/train_settings/*/debug.py
 pytracking/parameter/*/debug.py
@@ -170,6 +168,8 @@ pytracking/result_plots/
 pytracking/evaluation/local.py
 pytracking/run_local.py
 pretrained_models/
+tensorboard/
+output/
 # Hope
 *.hope
 .hopemeta

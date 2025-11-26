@@ -181,6 +181,7 @@ class LTRTrainer(BaseTrainer):
             print_str += 'FPS: %.1f (%.1f)  ,  ' % (average_fps, batch_fps)
 
             # 2021.12.14 add data time print
+            # NOTE: DataTime 表示开始读取一个数据批次到将该批次数据移动到 GPU 上所消耗的总时间
             print_str += 'DataTime: %.3f (%.3f)  ,  ' % (self.avg_date_time / self.num_frames * batch_size, self.avg_gpu_trans_time / self.num_frames * batch_size)
             print_str += 'ForwardTime: %.3f  ,  ' % (self.avg_forward_time / self.num_frames * batch_size)
             print_str += 'TotalTime: %.3f  ,  ' % ((current_time - self.start_time) / self.num_frames * batch_size)

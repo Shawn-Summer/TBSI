@@ -1,0 +1,26 @@
+class EnvironmentSettings:
+    def __init__(self):
+        self.workspace_dir = '/data1/zhh/xiaxulong/TBSI'    # Base directory for saving network checkpoints.
+        self.tensorboard_dir = '/data1/zhh/xiaxulong/TBSI/tensorboard'    # Directory for tensorboard files.
+        self.pretrained_networks = '/data1/zhh/xiaxulong/TBSI/pretrained_networks'
+        self.lasot_dir = '/data1/zhh/xiaxulong/TBSI/data/lasot'
+        self.got10k_dir = '/data1/zhh/xiaxulong/TBSI/data/got10k/train'
+        self.got10k_val_dir = '/data1/zhh/xiaxulong/TBSI/data/got10k/val'
+        self.lasot_lmdb_dir = '/data1/zhh/xiaxulong/TBSI/data/lasot_lmdb'
+        self.got10k_lmdb_dir = '/data1/zhh/xiaxulong/TBSI/data/got10k_lmdb'
+        self.trackingnet_dir = '/data1/zhh/xiaxulong/TBSI/data/trackingnet'
+        self.trackingnet_lmdb_dir = '/data1/zhh/xiaxulong/TBSI/data/trackingnet_lmdb'
+        self.coco_dir = '/data1/zhh/xiaxulong/TBSI/data/coco'
+        self.coco_lmdb_dir = '/data1/zhh/xiaxulong/TBSI/data/coco_lmdb'
+        self.lvis_dir = ''
+        self.sbd_dir = ''
+        self.imagenet_dir = '/data1/zhh/xiaxulong/TBSI/data/vid'
+        self.imagenet_lmdb_dir = '/data1/zhh/xiaxulong/TBSI/data/vid_lmdb'
+        self.lasher_train_dir = '/data1/zhh/xiaxulong/TBSI/data/lasher/trainingset'
+        self.lasher_test_dir = '/data1/zhh/xiaxulong/TBSI/data/lasher/testingset'
+        self.imagenetdet_dir = ''
+        self.ecssd_dir = ''
+        self.hkuis_dir = ''
+        self.msra10k_dir = ''
+        self.davis_dir = ''
+        self.youtubevos_dir = ''
