@@ -224,6 +224,9 @@ python tracking/train.py --script tbsi_track --config vitb_256_tbsi_4x4_4e4_lash
 
 ```bash
 python tracking/train.py --script tbsi_track --config vitb_256_tbsi_4x4_4e4_lasher_15ep_in1k --save_dir ./output/vitb_256_tbsi_4x4_4e4_lasher_15ep_in1k --mode multiple --nproc_per_node 2
+
+python tracking/train.py --script tbsi_track --config vitb_256_tbsi_32x1_1e4_lasher_15ep_sot --save_dir ./output/vitb_256_tbsi_32x1_1e4_lasher_15ep_sot --mode multiple --nproc_per_node 7
+
 ```
 
 ```bash
@@ -324,6 +327,7 @@ python tracking/train.py --script tbsi_track --config vitb_256_tbsi_32x4_4e4_las
 
 ```bash
 python tracking/test.py tbsi_track vitb_256_tbsi_4x4_4e4_lasher_15ep_in1k --dataset_name lasher_test --threads 6 --num_gpus 1
+python tracking/test.py tbsi_track vitb_256_tbsi_32x1_1e4_lasher_15ep_sot  --dataset_name lasher_test --threads 6 --num_gpus 1
 ```
 
 然后就会在`output/test`中生成一些测试集的结果:
@@ -367,6 +371,7 @@ python tracking/test.py tbsi_track vitb_256_tbsi_32x4_4e4_lasher_15ep_in1k --dat
 
 ```python
 python tracking/analysis_results.py --tracker_name tbsi_track --tracker_param vitb_256_tbsi_32x4_4e4_lasher_15ep_in1k --dataset_name rgbt210
+python tracking/analysis_results.py --tracker_name tbsi_track --tracker_param vitb_256_tbsi_32x1_1e4_lasher_15ep_sot --dataset_name lasher_test
 ```
 
 
@@ -393,3 +398,16 @@ vitb_256_tbsi_32x4_4e4_lasher_15ep_in1k      | 54.28      | 67.95      | 33.20  
 ```
 
 
+```bash
+Computed results over 245 / 245 sequences
+
+Reporting results over 245 / 245 sequences
+
+lasher_test                                 | AUC        | OP50       | OP75       | Precision    | Norm Precision    |
+vitb_256_tbsi_32x1_1e4_lasher_15ep_sot      | 56.55      | 68.90      | 47.46      | 70.34        | 66.74             |
+
+```
+
+这里主要看 AUC (success),precision以及norm precision
+
+问题: 使用 sot 预训练模型的结果好狠多,但是使用image net 的就不行.
